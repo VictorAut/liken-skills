@@ -1,0 +1,7 @@
+{
+  "name": "liken/liken-skills",
+  "version": "0.1.0",
+  "description": "Agent skills for Liken: near-deduplication and record linkage for Python DataFrames.",
+  "private": false,
+  "skills": "./skills/"
+}
