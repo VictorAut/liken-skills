@@ -10,11 +10,11 @@ jobs:
     name: plugin | validate
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v6
 
-      - name: tessl | install
-        run: curl -fsSL https://get.tessl.io | sh
+      - name: tessl | setup
+        uses: tesslio/setup-tessl@v2
 
       - name: tessl | plugin lint
         run: tessl plugin lint .
