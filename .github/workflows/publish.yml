@@ -2,31 +2,25 @@ name: publish
 
 on:
   workflow_dispatch:
-    inputs:
-      public:
-        description: "Publish publicly (requires registry approval)"
-        type: boolean
-        default: false
 
 jobs:
   publish:
-    name: Publish plugin to Tessl
+    name: plugin | publish
     runs-on: ubuntu-latest
-    environment: tessl-publish
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v6
 
-      - name: Install Tessl CLI
-        run: curl -fsSL https://get.tessl.io | sh
+      - name: tessl | setup
+        uses: tesslio/setup-tessl@v2
+        with:
+          token: ${{ secrets.TESSL_TOKEN }}
 
-      - name: Lint plugin
+      - name: tessl | plugin lint
         run: tessl plugin lint .
 
-      - name: Publish plugin
-        env:
-          TESSL_TOKEN: ${{ secrets.TESSL_TOKEN }}
-        run: |
-          tessl plugin publish . \
-            --workspace liken \
-            ${{ inputs.public && '--public' || '' }}
+      - name: tessl | plugin publish
+        run: tessl plugin publish
