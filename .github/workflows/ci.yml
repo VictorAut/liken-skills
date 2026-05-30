@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   pull_request:
@@ -10,21 +10,11 @@ jobs:
     name: plugin | validate
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v6
 
-      - name: tessl | install
-        run: curl -fsSL https://get.tessl.io | sh
+      - name: tessl | setup
+        uses: tesslio/setup-tessl@v2
 
       - name: tessl | plugin lint
         run: tessl plugin lint .
-
-      - name: tessl | pack plugin
-        run: tessl plugin pack --output ./dist .
-
-      - name: tessl | upload packed plugin
-        uses: actions/upload-artifact@v4
-        with:
-          name: liken-skills-plugin
-          path: ./dist
-          if-no-files-found: error
