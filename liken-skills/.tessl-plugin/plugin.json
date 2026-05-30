@@ -1,0 +1,7 @@
+{
+  "name": "<your-tessl-workspace>/liken-skills",
+  "version": "0.1.0",
+  "description": "Agent skills for Liken — near-deduplication and record linkage for pandas/Polars/Spark/Dask/Ray/Modin DataFrames.",
+  "private": false,
+  "skills": "skills/*"
+}
